@@ -1,0 +1,25 @@
+# ==============================================================================
+# Render Blueprint Configuration (render.yaml)
+# https://render.com/docs/blueprint-spec
+# ==============================================================================
+
+services:
+  - type: web
+    name: assingly
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    region: oregon
+    numInstances: 1
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /app/data/assingly.db
+      - key: UPLOAD_DIR
+        value: /app/data/private-uploads
+    disk:
+      name: assingly-data
+      mountPath: /app/data
+      sizeGB: 1
